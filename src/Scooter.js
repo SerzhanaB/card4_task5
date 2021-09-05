@@ -44,6 +44,5 @@ renderScooter(){
   }
 }
 
-setInterval(ScooterComp,3000);
 
 export default ScooterComp;
