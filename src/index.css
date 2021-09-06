@@ -22,3 +22,7 @@ text-align: center;
 body{
   background-color: #f2e1bd
 }
+.card.marked {
+
+  border: 3px solid crimson;
+}

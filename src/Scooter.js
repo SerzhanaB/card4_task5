@@ -1,9 +1,16 @@
 import React, { Component } from "react";
-import "./App.css";
+
 
 function Scooter(props) {
+
+  const classes=['card']
+if (props.scooter.marked) {
+
+  classes.push('marked')
+}
+
   return (
-    <div className="card">
+    <div className={classes.join(' ')} onClick={props.onMark}>
       <h3>Наименование: {props.scooter.name}</h3>
       <p>Заряд: {props.scooter.charge}</p>
       <p> Стоимость: {props.scooter.price}</p>
@@ -14,21 +21,31 @@ function Scooter(props) {
 class ScooterComp extends Component {
   state = {
     scooters: [
-      { name: "Lila", charge: "100%", price: "120" },
-      { name: "LEO", charge: "80%", price: "130" },
-      { name: "Mario", charge: "70%", price: "150" },
-      { name: "Mario1", charge: "70%", price: "150" },
-      { name: "Mario2", charge: "20%", price: "120" },
-      { name: "Mario3", charge: "60%", price: "140" },
-      { name: "Mario4", charge: "80%", price: "110" },
+      { marked:false, name: "Lila", charge: "100%", price: "120" },
+      { marked:false, name: "LEO", charge: "80%", price: "130" },
+      { marked:false, name: "Mario", charge: "70%", price: "150" },
+      { marked:false, name: "Mario1", charge: "70%", price: "150" },
+      { marked:false, name: "Mario2", charge: "20%", price: "120" },
+      { marked:false, name: "Mario3", charge: "60%", price: "140" },
+      { marked:false, name: "Mario4", charge: "80%", price: "110" },
     ],
   }
+handleMarked(name) {
+const scooters=this.state.scooters.concat()
+const scooter=scooters.find(c=> c.name===name)
+scooter.marked =!scooter.marked
+this.setState({scooters})
+}
   
 renderScooter(){
 
     return this.state.scooters.map(scooter => {
         return (
-        <Scooter scooter={scooter}  key={scooter.name+Math.random()}/>
+        <Scooter
+         scooter={scooter} 
+          key={scooter.name+Math.random()}
+          onMark={this.handleMarked.bind(this,scooter.name)}
+          />
       )
     })
 
